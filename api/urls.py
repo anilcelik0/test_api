@@ -16,14 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from rest_framework.routers import DefaultRouter
-
-
-router = DefaultRouter()
-router.register(r'', views.CurrentUserViewSet)
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('',views.User_create_api_view, name='users-list'),
+    path('<int:id>',views.User_detail_api_view, name='users-detay'),
     path("register", views.register, name="register"),
 ]
