@@ -1,7 +1,6 @@
 from django.contrib import auth
 from django.db.models import fields
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer, UserSerializer 
 from django.contrib.auth.models import User 
 from .models import users
 
