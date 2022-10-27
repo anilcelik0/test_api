@@ -2,7 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from . import serializers, models
+from . import serializers
+from .models import users
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -47,12 +48,13 @@ def register(request):
 def User_create_api_view(request):
     
     if request.method == 'GET':
-        Users = User.objects.all()
+        Users = users.objects.all()
         serializer = serializers.User_Modal(Users, many = True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
         serializer = serializers.User_Modal(data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -62,7 +64,7 @@ def User_create_api_view(request):
 @api_view(['GET','PUT','DELETE'])
 def User_detail_api_view(request,id):
     try:
-        photo_instance = User.objects.get(id=id)
+        photo_instance = users.objects.get(id=id)
     
     except User.DoesNotExist:
         return Response(

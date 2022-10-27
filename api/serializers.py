@@ -7,5 +7,5 @@ from .models import users
 
 class User_Modal(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = users
         fields = ('id','email','username','first_name','last_name')
